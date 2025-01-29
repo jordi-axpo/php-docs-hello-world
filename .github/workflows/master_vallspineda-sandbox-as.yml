@@ -58,18 +58,18 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
       
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_B71C7282B7A843E2B53C7A9EE4E8D8EB }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_243233BD32534092BCB9CBA57C93143B }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6DDC1BE05500412D820013AD8E24B335 }}
+      # - name: Login to Azure
+      #   uses: azure/login@v2
+      #   with:
+      #     client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_B71C7282B7A843E2B53C7A9EE4E8D8EB }}
+      #     tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_243233BD32534092BCB9CBA57C93143B }}
+      #     subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6DDC1BE05500412D820013AD8E24B335 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: 'vallspineda-sandbox-as'
-          slot-name: 'Production'
           package: .
+          publish-profile: ${{ secrets.azureWebAppPublishProfile }}
           
